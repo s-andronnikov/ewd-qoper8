@@ -1,10 +1,16 @@
 describe("Master", function() {
     // init environment
     const qoper8 = require('../../lib/ewd-qoper8');
-    var master = new qoper8.masterProcess();
     jasmine.clock().install();
 
     describe("VERSION", function () {
+        var master;
+        beforeEach(function() {
+            master = new qoper8.masterProcess();
+            master.log = false;
+            master.shutdownDelay = 1;
+        });
+
         it ("should be not empty string", function () {
             var version = master.version();
             expect(version).toBeNonEmptyString();
@@ -12,6 +18,17 @@ describe("Master", function() {
     });
 
     describe("QUEUE", function () {
+        var master;
+        beforeEach(function() {
+            master = new qoper8.masterProcess();
+            master.log = false;
+            master.shutdownDelay = 1;
+        });
+
+        afterEach(function () {
+            //
+        });
+
         it ("should have control methods", function () {
             var spy1 = spyOn(master, 'start');
             expect(master.start).toBeDefined();
@@ -35,33 +52,33 @@ describe("Master", function() {
             }, 100);
         }, 300);
 
-        // it ("Should be possible to add messages to queue", function() {
-        //     master.on('started', function () {
-        //         var messageObj = {
-        //             type: 'testMessage1',
-        //             hello: 'world'
-        //         };
-        //         master.addToQueue(messageObj);
-        //
-        //         messageObj = {
-        //             type: 'testMessage2',
-        //             hello: 'another world'
-        //         };
-        //         master.addToQueue(messageObj);
-        //     });
-        //     master.start();
-        //     // jasmine.clock().tick(50);
-        //     // console.log('---', master.queue.length);
-        //     setTimeout(function () {
-        //         master.stop();
-        //     }, 100);
-        // }, 300);
+        it ("Should be possible to add messages to queue", function() {
+            master.on('started', function () {
+                var messageObj = {
+                    type: 'testMessage1',
+                    hello: 'world'
+                };
+                this.addToQueue(messageObj);
 
+                messageObj = {
+                    type: 'testMessage2',
+                    hello: 'another world'
+                };
+                this.addToQueue(messageObj);
+            });
+            master.start();
 
+            expect(master).toHaveNonEmptyArray('queue');
+            expect(master.queue).toBeArrayOfSize(2);
+
+            setTimeout(function () {
+                master.stop();
+            }, 100);
+        }, 300);
     });
 
 
-    xdescribe("WORKER", function () {
+    // xdescribe("WORKER", function () {
     //     it ("should have process id", function () {
     //         console.log(master.process());
     //         expect(master.process)
@@ -71,13 +88,7 @@ describe("Master", function() {
         // })
     //
     //
-    });
+    // });
     //
     //
-    /** @todo */
-    // describe('upTime', function () {
-    //     it('', function () {
-    //
-    //     });
-    // })
 });
