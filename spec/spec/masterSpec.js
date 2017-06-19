@@ -34,5 +34,50 @@ describe("Master", function() {
                 master.stop();
             }, 100);
         }, 300);
+
+        // it ("Should be possible to add messages to queue", function() {
+        //     master.on('started', function () {
+        //         var messageObj = {
+        //             type: 'testMessage1',
+        //             hello: 'world'
+        //         };
+        //         master.addToQueue(messageObj);
+        //
+        //         messageObj = {
+        //             type: 'testMessage2',
+        //             hello: 'another world'
+        //         };
+        //         master.addToQueue(messageObj);
+        //     });
+        //     master.start();
+        //     // jasmine.clock().tick(50);
+        //     // console.log('---', master.queue.length);
+        //     setTimeout(function () {
+        //         master.stop();
+        //     }, 100);
+        // }, 300);
+
+
     });
+
+
+    xdescribe("WORKER", function () {
+    //     it ("should have process id", function () {
+    //         console.log(master.process());
+    //         expect(master.process)
+    //             .toBeNumber()
+    //             .toBeGreaterThan(0);
+        //
+        // })
+    //
+    //
+    });
+    //
+    //
+    /** @todo */
+    // describe('upTime', function () {
+    //     it('', function () {
+    //
+    //     });
+    // })
 });
