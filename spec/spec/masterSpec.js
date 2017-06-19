@@ -4,14 +4,14 @@ describe("Master", function() {
     var master = new qoper8.masterProcess();
     jasmine.clock().install();
 
-    xdescribe("VERSION", function () {
+    describe("VERSION", function () {
         it ("should be not empty string", function () {
             var version = master.version();
             expect(version).toBeNonEmptyString();
         });
     });
 
-    xdescribe("QUEUE", function () {
+    describe("QUEUE", function () {
         it ("should have control methods", function () {
             var spy1 = spyOn(master, 'start');
             expect(master.start).toBeDefined();
@@ -35,25 +35,4 @@ describe("Master", function() {
             }, 100);
         }, 300);
     });
-
-
-    describe("WORKER", function () {
-    //     it ("should have process id", function () {
-    //         console.log(master.process());
-    //         expect(master.process)
-    //             .toBeNumber()
-    //             .toBeGreaterThan(0);
-        //
-        // })
-    //
-    //
-    });
-    //
-    //
-    /** @todo */
-    // describe('upTime', function () {
-    //     it('', function () {
-    //
-    //     });
-    // })
 });
